@@ -4,9 +4,12 @@ author: "Mohamed Alhassan"
 date: "2022-11-14"
 output: word_document
 ---
+# Loading in the data
 
 ```{r}
 library(tidyverse)
 ## This is a test
+homicides <- read_csv("https://raw.githubusercontent.com/washingtonpost/data-homicides/master/homicide-data.csv") %>% 
+  select(victim_last)
 ```
 
