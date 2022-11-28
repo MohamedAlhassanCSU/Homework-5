@@ -11,8 +11,10 @@ library(tidyverse)
 library(lubridate)
 homicides <- read_csv("../data/homicide-data.csv") %>% 
   filter(city == "Baltimore") %>% 
-  mutate(reported_date = ymd(reported_date))
-
+  mutate(reported_date = ymd(reported_date)) %>% 
+  separate(col = reported_date, into = c("year", "month", "day"), sep = "-") %>% 
+  select(-day) %>%
+  unite(col = date, year, month, sep = "-")
 
 ```
 
