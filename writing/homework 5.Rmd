@@ -28,6 +28,15 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
 ```{r}
 library(ggplot2)
 library(ggthemes)
+
+gray <- read_csv("../data/homicide-data.csv") %>% 
+  filter(uid == "Bal-003523") %>%
+  mutate(reported_date = ymd(reported_date)) %>% 
+  separate(col = reported_date, into = c("year", "month", "day"), sep = "-") %>% 
+  select(-day) %>%
+  unite(col = reported_date, year, month, sep = "-") %>% 
+  mutate(reported_date = ym(reported_date))
+  
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
   geom_col() +
