@@ -6,6 +6,8 @@ output: word_document
 ---
 # Choice 2
 
+## Cleaning the data
+
 ```{r}
 library(tidyverse)
 library(lubridate)
@@ -16,7 +18,20 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
   select(-day) %>%
   unite(col = reported_date, year, month, sep = "-") %>% 
   group_by(reported_date) %>% 
-  summarize(total = n())
+  summarize(total = n()) %>% 
+  mutate(reported_date = ym(reported_date))
+
+```
+
+## Creating the Graph
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+homicides %>%
+  ggplot(aes(x = reported_date, y = total)) +
+  geom_col() +
+  theme_dark()
 
 ```
 
