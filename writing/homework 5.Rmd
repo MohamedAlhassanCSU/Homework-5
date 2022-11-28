@@ -38,10 +38,9 @@ gray <- read_csv("../data/homicide-data.csv") %>%
   select(reported_date) 
 
 
-homicides <- homicides %>% 
-  filter(str_detect(reported_date, "20..-[0-1][^1-4]"))
+homicide_logical <- str_detect(homicides$reported_date, "20..-[0-1][^1-4]")
 
-homicides$summer <- homicide
+homicides$summer <- homicide_logical
   
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
