@@ -8,6 +8,8 @@ output: word_document
 
 ```{r}
 library(tidyverse)
-homicides <- read_csv("../data/homicide-data.csv")
+homicides <- read_csv("../data/homicide-data.csv") %>% 
+  filter(city == "Baltimore")
+
 ```
 
