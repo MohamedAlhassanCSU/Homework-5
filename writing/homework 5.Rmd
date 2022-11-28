@@ -14,7 +14,9 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
   mutate(reported_date = ymd(reported_date)) %>% 
   separate(col = reported_date, into = c("year", "month", "day"), sep = "-") %>% 
   select(-day) %>%
-  unite(col = date, year, month, sep = "-")
+  unite(col = reported_date, year, month, sep = "-") %>% 
+  group_by(reported_date) %>% 
+  summarize(total = n())
 
 ```
 
