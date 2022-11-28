@@ -31,6 +31,7 @@ library(ggthemes)
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
   geom_col() +
+  labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
   theme_dark()
 
 ```
