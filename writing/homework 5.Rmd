@@ -4,7 +4,7 @@ author: "Mohamed Alhassan"
 date: "2022-11-14"
 output: word_document
 ---
-# Loading in the data
+# Choice 2
 
 ```{r}
 library(tidyverse)
