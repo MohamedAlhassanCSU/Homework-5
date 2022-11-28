@@ -8,8 +8,6 @@ output: word_document
 
 ```{r}
 library(tidyverse)
-## This is a test
-homicides <- read_csv("https://raw.githubusercontent.com/washingtonpost/data-homicides/master/homicide-data.csv") %>% 
-  select(victim_last)
+homicides <- read_csv("../data/homicide-data.csv")
 ```
 
