@@ -33,13 +33,20 @@ gray <- read_csv("../data/homicide-data.csv") %>%
   filter(uid == "Bal-003523") %>%
   mutate(reported_date = ymd(reported_date)) %>% 
   separate(col = reported_date, into = c("year", "month", "day"), sep = "-") %>% 
-  select(-day) %>%
   unite(col = reported_date, year, month, sep = "-") %>% 
-  mutate(reported_date = ym(reported_date))
+  mutate(reported_date = ym(reported_date)) %>% 
+  select(reported_date) 
+
   
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
   geom_col() +
+   geom_vline(xintercept = gray$reported_date,
+             linetype = 5,
+             size = 2,
+             color = "red") +
+  geom_text(data = filter(.data = homicides$reported_date == 2015-04-01),
+            label = "Arrest of Freddie Gray") +
   labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
   theme_dark()
 
