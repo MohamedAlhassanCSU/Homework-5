@@ -70,6 +70,11 @@ homicides %>%
              color = "red") +
   labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
   theme_dark() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  geom_text(data = homicides[100,],
+            label = "Arrest of \n Freddie Gray",
+            vjust = -2,
+            hjust = 1,
+            color = "white")
 ```
 
