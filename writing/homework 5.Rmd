@@ -2,10 +2,14 @@
 title: "Homework 5"
 author: "Mohamed Alhassan"
 date: "2022-11-14"
-output:
-  pdf_document: default
-  word_document: default
+output: pdf_document
 ---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, message =  FALSE, warning =  FALSE, error = FALSE)
+```
+
+
 # Choice 2
 
 ## Cleaning the data
@@ -13,6 +17,7 @@ output:
 ```{r}
 library(tidyverse)
 library(lubridate)
+
 homicides <- read_csv("../data/homicide-data.csv") %>% 
   filter(city == "Baltimore") %>% 
   mutate(reported_date = ymd(reported_date)) %>% 
@@ -22,7 +27,6 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
   group_by(reported_date) %>% 
   summarize(total = n()) %>% 
   mutate(reported_date = ym(reported_date))
-
 ```
 
 ## Creating the Graph
