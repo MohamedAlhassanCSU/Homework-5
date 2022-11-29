@@ -29,7 +29,7 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
   mutate(reported_date = ym(reported_date))
 ```
 
-## Creating the Graph
+## Cleaning the data for bar chart
 
 ```{r}
 library(ggplot2)
@@ -53,22 +53,23 @@ homicides <- homicides %>%
          season = fct_recode(season, Summer = "TRUE",
                              Winter = "FALSE"),
          season = fct_reorder(season, total, .desc = TRUE))
+```
 
-  
-  
+## Bar chart
+
+```{r}
 homicides %>%
-  ggplot(aes(x = reported_date, y = total, fill = season)) +
-  geom_smooth(aes(x = reported_date, y = total), method = "lm", se = TRUE) +
-  scale_fill_manual(values = c("gray", "skyblue1")) +
+  ggplot(aes(x = reported_date, y = total)) +
+  geom_col(mapping = aes(fill = season)) +
+  geom_smooth(method = "loess", span = 0.1, se = FALSE) +
+  scale_fill_manual(values = c("#d3d3d3", "#add8e6")) +
   guides(fill = guide_legend(title = "")) +
-  geom_col() +
   geom_vline(xintercept = gray$reported_date,
              linetype = 5,
              size = 2,
              color = "red") +
   labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
   theme_dark() +
-  theme(legend.position = "bottom") 
-
+  theme(legend.position = "bottom")
 ```
 
