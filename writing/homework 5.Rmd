@@ -48,22 +48,23 @@ homicides <- homicides %>%
   mutate(season = as_factor (x = season),
          season = fct_recode(season, Summer = "TRUE",
                              Winter = "FALSE"),
-         season = fct_reorder(season, total, desc)
+         season = fct_reorder(season, total, .desc = TRUE))
 
   
   
 homicides %>%
   ggplot(aes(x = reported_date, y = total, fill = season)) +
-  scale_fill_manual(values = c("skyblue1", "gray")) +
+  geom_smooth(aes(x = reported_date, y = total), method = "lm", se = TRUE) +
+  scale_fill_manual(values = c("gray", "skyblue1")) +
   guides(fill = guide_legend(title = "")) +
-  theme(legend.position = "bottom") +
   geom_col() +
   geom_vline(xintercept = gray$reported_date,
              linetype = 5,
              size = 2,
              color = "red") +
   labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
-  theme_dark()
+  theme_dark() +
+  theme(legend.position = "bottom") 
 
 ```
 
