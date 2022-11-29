@@ -40,7 +40,13 @@ gray <- read_csv("../data/homicide-data.csv") %>%
 
 homicide_logical <- str_detect(homicides$reported_date, "20..-[0-1][^1-4]")
 
-homicides$summer <- homicide_logical
+homicides$season <- homicide_logical
+
+homicides <- homicides %>%
+  mutate(season = as_factor (x = season),
+         season = fct_recode(season, Summer = "TRUE",
+                             Winter = "FALSE"))
+  
   
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
