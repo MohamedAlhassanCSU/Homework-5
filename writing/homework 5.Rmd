@@ -2,7 +2,9 @@
 title: "Homework 5"
 author: "Mohamed Alhassan"
 date: "2022-11-14"
-output: word_document
+output:
+  pdf_document: default
+  word_document: default
 ---
 # Choice 2
 
@@ -45,12 +47,16 @@ homicides$season <- homicide_logical
 homicides <- homicides %>%
   mutate(season = as_factor (x = season),
          season = fct_recode(season, Summer = "TRUE",
-                             Winter = "FALSE"))
+                             Winter = "FALSE"),
+         season = fct_reorder(season, total, desc)
+
   
   
 homicides %>%
   ggplot(aes(x = reported_date, y = total, fill = season)) +
-  scale_fill_manual(values = c("#999999", "#56B4E9")) +
+  scale_fill_manual(values = c("skyblue1", "gray")) +
+  guides(fill = guide_legend(title = "")) +
+  theme(legend.position = "bottom") +
   geom_col() +
   geom_vline(xintercept = gray$reported_date,
              linetype = 5,
