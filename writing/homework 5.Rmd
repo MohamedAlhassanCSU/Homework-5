@@ -30,7 +30,7 @@ homicides <- read_csv("../data/homicide-data.csv") %>%
   mutate(reported_date = ym(reported_date))
 ```
 
-## Cleaning the data for bar chart
+## Cleaning the data for graph
 
 ```{r}
 library(ggplot2)
@@ -56,7 +56,7 @@ homicides <- homicides %>%
          season = fct_reorder(season, total, .desc = TRUE))
 ```
 
-## Bar chart
+## Graph
 
 ```{r}
 homicides %>%
