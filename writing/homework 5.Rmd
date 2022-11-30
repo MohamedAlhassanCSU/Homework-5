@@ -58,7 +58,7 @@ homicides <- homicides %>%
 
 ## Graph
 
-```{r}
+```{r, fig.dim = c(11, 3.5)}
 homicides %>%
   ggplot(aes(x = reported_date, y = total)) +
   geom_col(mapping = aes(fill = season)) +
@@ -66,8 +66,8 @@ homicides %>%
   scale_fill_manual(values = c("#d3d3d3", "#add8e6")) +
   guides(fill = guide_legend(title = "")) +
   geom_vline(xintercept = gray$reported_date,
-             linetype = 5,
-             linewidth = 2,
+             linetype = 2,
+             linewidth = 1.5,
              color = "red") +
   labs(y = "Monthly homicides", x = "Date", title = "Homicides in Baltimore, MD") +
   theme_dark() +
@@ -75,7 +75,7 @@ homicides %>%
   geom_text(data = homicides[100,],
             label = "Arrest of \n Freddie Gray",
             vjust = -2,
-            hjust = 1,
+            hjust = 1.1,
             color = "white")
 ```
 
